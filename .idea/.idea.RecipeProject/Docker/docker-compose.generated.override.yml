@@ -1,0 +1,29 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.8"
+services:
+  recipe_service:
+    build:
+      context: "/Users/giorgos/RiderProjects/RecipeProject/RecipeProject"
+      dockerfile: "Dockerfile"
+      args:
+        BUILD_CONFIGURATION: "Debug"
+    entrypoint:
+    - "/opt/JetBrains/RiderDebuggerTools/linux-arm64/JetBrains.Debugger.Worker"
+    - "--runtimeconfig"
+    - "/opt/JetBrains/RiderDebuggerTools/JetBrains.Debugger.Worker.runtimeconfig.json"
+    - "--mode=server"
+    - "--frontend-port=57000"
+    - "--backend-port=57200"
+    - "--roslyn-worker-port=57400"
+    - "--timeout=60"
+    environment:
+      RIDER_DEBUGGER_LOG_DIR: "/var/opt/JetBrains/RiderDebuggerTools"
+      RESHARPER_LOG_CONF: "/etc/opt/JetBrains/RiderDebuggerTools/backend-log.xml"
+    ports:
+    - "127.0.0.1:57000:57000"
+    - "127.0.0.1:57200:57200"
+    - "127.0.0.1:57400:57400"
+    volumes:
+    - "/Users/giorgos/.local/share/JetBrains/RiderRemoteDebugger/2024.3.7/LinuxArm64:/opt/JetBrains/RiderDebuggerTools"
+    - "/Applications/Rider.app/Contents/bin/backend-log.xml:/etc/opt/JetBrains/RiderDebuggerTools/backend-log.xml"
+    - "/Users/giorgos/Library/Logs/JetBrains/Rider2024.3/DebuggerWorker/JetBrains.Debugger.Worker.2025_4_12_22_31_04:/var/opt/JetBrains/RiderDebuggerTools:rw"
